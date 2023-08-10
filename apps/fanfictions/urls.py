@@ -1,0 +1,77 @@
+from django.urls import path
+from django.views.generic import TemplateView
+
+from .views import (
+    FanfictionChatGPTCreateView,
+    FanfictionCreateView,
+    FanfictionDelayedPublicationView,
+    FanfictionDeleteView,
+    FanfictionDetailView,
+    FanfictionListView,
+    FanfictionUpdateView,
+    GenresAutocompleteView,
+)
+
+urlpatterns = [
+    path(
+        "<int:pk>/",
+        FanfictionDetailView.as_view(),
+        name="fanfiction-details",
+    ),
+    path(
+        "",
+        FanfictionListView.as_view(),
+        name="fanfiction-list",
+    ),
+    path(
+        "create/",
+        FanfictionCreateView.as_view(),
+        name="create-fanfiction",
+    ),
+    path(
+        "<int:pk>/update/",
+        FanfictionUpdateView.as_view(),
+        name="update-fanfiction",
+    ),
+    path(
+        "<int:pk>/delete/",
+        FanfictionDeleteView.as_view(),
+        name="delete-fanfiction",
+    ),
+    path(
+        "create/chatgpt/",
+        FanfictionChatGPTCreateView.as_view(),
+        name="create-fanfiction-with-chatgpt",
+    ),
+    path(
+        "create/chatgpt/success",
+        TemplateView.as_view(
+            template_name="fanfictions/chatgpt_success_page.html",
+        ),
+        name="chatgpt-success-page",
+    ),
+    path(
+        "genres/autocomplete/",
+        GenresAutocompleteView.as_view(),
+        name="genres-autocomplete",
+    ),
+    path(
+        "genres/autocomplete-create/",
+        GenresAutocompleteView.as_view(
+            create_field="name",
+        ),
+        name="genres-autocomplete-create",
+    ),
+    path(
+        "<int:pk>/publish/",
+        FanfictionDelayedPublicationView.as_view(),
+        name="delayed-publication",
+    ),
+    path(
+        "publish/success",
+        TemplateView.as_view(
+            template_name="fanfictions/delayed_publication_success.html",
+        ),
+        name="delayed-publication-success",
+    ),
+]

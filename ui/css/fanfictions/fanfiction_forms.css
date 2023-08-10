@@ -1,0 +1,12 @@
+.errorlist {
+  color: #c41414;
+  font-size: small;
+}
+
+.content-container {
+  width: 700px;
+  margin: 40px auto;
+  padding: 40px;
+  background-color: var(--white);
+  border-radius: 4px;
+}

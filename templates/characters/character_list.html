@@ -1,0 +1,55 @@
+{% extends "characters/character_list_base.html" %}
+
+{% block filtering %}
+  <div class="card text-center mb-3">
+    <div class="card-body">
+      <form method="get" autocomplete="off">
+        {{ filter.form.media }}
+        <h5 class="card-title font-weight-bold">Filter options</h5>
+        <p>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+              <input class="form-control" type="text" name="search" value="{{ request.GET.search|default_if_none:'' }}" placeholder="Search character" id="search">
+            </li>
+            <li class="list-group-item">
+              <label class="font-weight-bold">Age:</label>
+              <input class="form-control" type="number" name="age" value="{{ request.GET.age|default_if_none:'' }}" placeholder="Age" id="age">
+            </li>
+            <li class="list-group-item">
+              <label class="font-weight-bold">Choose universe:</label>
+              {{ filter.form.universe }}
+            </li>
+          </ul>
+        </p>
+        <button class="btn btn-outline-success" type="submit">Submit</button>
+      </form>
+    </div>
+  </div>
+{% endblock filtering %}
+
+{% block page_title %}
+  <h1>Character List</h1>
+{% endblock page_title %}
+
+{% block character_list %}
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Age</th>
+        <th>Universe</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for character in character_list %}
+        <tr>
+          <td><a href="{% url 'character-details' pk=character.id %}">{{ character.name }}</a></td>
+          <td>{{ character.age }}</td>
+          <td>{{ character.universe.name }}</td>
+        </tr>
+      {% empty %}
+        <tr><td colspan="3">There are no characters.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock character_list %}

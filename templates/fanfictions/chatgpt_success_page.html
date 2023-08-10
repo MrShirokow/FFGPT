@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block head %}
+  <link rel="stylesheet" href="{% static 'css/fanfictions/fanfiction_forms.css' %}" />
+{% endblock head %}
+
+{% block content %}
+
+  <div class="content-container">
+    <div class="card border border-primary">
+      <div class="card-header fs-1 text-center">Success!</div>
+      <div class="card-body text-center">
+        <div>The ChatGPT request was sent successfully.</div>
+        <div>A new fanfiction will soon appear in your
+          <a href="{% url 'user-fanfiction-list' %}" class="link-primary">Fanfiction List</a>
+          .
+        </div>
+      </div>
+      <div class="card-footer text-center">
+        <a href="{% url 'fanfiction-list' %}" class="btn btn-outline-success">Home</a>
+      </div>
+    </div>
+  </div>
+
+{% endblock content %}

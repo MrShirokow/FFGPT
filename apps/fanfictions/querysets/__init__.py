@@ -1,0 +1,1 @@
+from .fanfiction import FanfictionQuerySet

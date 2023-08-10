@@ -1,0 +1,54 @@
+
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block head %}
+  <link rel="stylesheet" href="{% static 'css/users/profile.css' %}" />
+{% endblock head %}
+
+{% block content %}
+
+  <div class="container justify-content-center">
+    <div class="card">
+      <div class="card-header fs-1 text-center">{{ user.email }}</div>
+      <div class="card-body">
+        <form method="post" enctype="multipart/form-data" autocomplete="off">
+          {% csrf_token %}
+          <div class="row justify-content-center mb-3">
+            {% if user.avatar %}
+              <img class="img-account-profile" src="{{ user.avatar.url }}">
+            {% else %}
+              <img class="img-account-profile" src="{% static 'default_avatar.jpg' %}">
+            {% endif %}
+          </div>
+          <div class="mb-3">
+            <input class="form-control" type="file" name="avatar">
+            {{form.errors.avatar}}
+          </div>
+          <div class="row mb-3">
+            <div class="col-md-6">
+              <label class="fs-5 mb-1" for="inputFirstName">First name</label>
+              <input class="form-control" id="inputFirstName" type="text" name="first_name" value="{{ user.first_name }}" placeholder="Enter your first name" />
+              {{form.errors.first_name}}
+            </div>
+            <div class="col-md-6">
+              <label class="fs-5 mb-1" for="inputLastName">Last name</label>
+              <input class="form-control" id="inputLastName" type="text" name="last_name" value="{{ user.last_name }}" placeholder="Enter your last name" />
+              {{form.errors.last_name}}
+            </div>
+          </div>
+          <div class="text-center pt-3">
+            <p>
+              <button class="btn btn-outline-success" type="submit">Save</button>
+            </p>
+            <p>
+              <a class="text-muted" href="{% url 'change-password' %}">Change password</a>
+            </p>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+{% endblock content %}

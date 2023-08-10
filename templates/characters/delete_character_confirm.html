@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block head %}
+  <link rel="stylesheet" href="{% static 'css/characters/character_forms.css' %}" />
+{% endblock head %}
+
+{% block content %}
+
+  <div class="content-container">
+    <div class="card border border-primary">
+      <div class="card-header fs-1 text-center">Delete Character</div>
+      <form method="post">
+        {% csrf_token %}
+        <div class="card-body text-center">
+          <p>Are you sure you want to delete your character
+            <a class="font-weight-bold text-decoration-underline">{{ object }}</a>?
+          </p>
+          {{ form }}
+        </div>
+        <div class="card-footer text-center">
+          <button type="submit" class="btn btn-outline-danger">Delete</button>
+          <a href="{{ request.META.HTTP_REFERER }}" class="btn btn-outline-secondary">Cancel</a>
+        </div>
+      </form>
+    </div>
+  </div>
+
+{% endblock content %}

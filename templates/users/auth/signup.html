@@ -1,0 +1,34 @@
+
+{% extends "base.html" %}
+{% load static %}
+
+{% block head %}
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"/>
+  <link rel="stylesheet" href="{% static 'css/users/auth.css' %}" />
+{% endblock head %}
+
+{% block content %}
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="card">
+          <form method="post" class="box">
+            {% csrf_token %}
+            <h1>Sign up</h1>
+            <input type="email" name="email" value="{{ form.email.value|default_if_none:'' }}" placeholder="Email" />
+            {{form.errors.email}}
+            <input type="password" name="password1" placeholder="Password" />
+            {{form.errors.password1}}
+            <input type="password" name="password2" placeholder="Password confirm"/>
+            {{form.errors.password2}}
+            {{form.non_field_errors}}
+            <input type="submit" value="Sign Up" />
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock content %}

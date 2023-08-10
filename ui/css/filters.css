@@ -1,0 +1,14 @@
+.card {
+  width: 15vw;
+  margin: 40px;
+  position: absolute;
+}
+
+.select2-selection,
+.select2-dropdown {
+  width: 11vw !important;
+}
+
+.select2-container {
+  min-width: 11vw !important;
+}

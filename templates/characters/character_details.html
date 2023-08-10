@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% load static %}
+{% block head %}
+  <link rel="stylesheet" href="{% static 'css/characters/character_details.css' %}" />
+{% endblock head %}
+
+{% block content %}
+
+  <div class="content">
+    <h1>{{ character.name }}</h1>
+    <p class="title">Universe</p>
+    <p>{{ character.universe }}</p>
+    <p class="title">Age</p>
+    <p>{{ character.age }}</p>
+    <p class="title">Gender </p>
+    <p>{{ character.gender }}</p>
+    <p class="title">Description </p>
+    <p class="text-break justify-content-between">{{ character.description }}</p>
+    <div class="card-footer text-center">
+      {% if character.user == user %}
+        <a href="{% url 'update-character' pk=character.id %}" class="btn btn-outline-success">Edit</a>
+      {% endif %}
+      <a href="{{request.META.HTTP_REFERER}}" class="btn btn-outline-primary">Go Back</a>
+    </div>
+  </div>
+
+{% endblock content %}

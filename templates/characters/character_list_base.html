@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% load static %}
+{% block head %}
+  <link rel="stylesheet" href="{% static 'css/characters/character_details.css' %}" />
+  <link rel="stylesheet" href="{% static 'css/filters.css' %}" />
+{% endblock head %}
+
+{% block content %}
+
+  {% block filtering %}
+  {% endblock filtering %}
+
+  <div class="content">
+
+    {% block page_title %}
+    {% endblock page_title %}
+
+    {% block character_list %}
+    {% endblock character_list %}
+
+    {% block bottom_pagination %}
+      {% include "pagination.html" %}
+    {% endblock bottom_pagination %}
+
+  </div>
+
+  {% block extra_js %}
+    <script type="text/javascript" src="{% static 'js/clear-url.js' %}"></script>
+  {% endblock extra_js%}
+
+{% endblock %}

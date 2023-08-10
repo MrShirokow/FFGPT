@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block super_block %}
+
+  <li class="nav-item">
+    <a class="nav-link" href="{% url 'admin:index' %}">Admin Page</a>
+  </li>
+  {% if debug %}
+    <li class="nav-item">
+      <a class="nav-link" href="{{open_api_ui}}">Open OpenApi</a>
+    </li>
+  {% endif %}
+
+{% endblock super_block %}
+
+{% block content %}
+
+  <div class="has-background-grey-dark p-5">
+    <div class="content">{{changelog.text|safe}}</div>
+  </div>
+
+{% endblock content %}

@@ -1,0 +1,78 @@
+{% extends "fanfictions/fanfiction_list_base.html" %}
+
+{% block filtering %}
+  <div class="card text-center mb-3">
+    <div class="card-body">
+      <form method="get" autocomplete="off">
+        {{ filter.form.media }}
+        <h5 class="card-title font-weight-bold">Filter options</h5>
+        <p>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+              <input class="form-control" type="text" name="search" value="{{ request.GET.search|default_if_none:'' }}" placeholder="Search fanfictions" id="search">
+            </li>
+            <li class="list-group-item">
+              <label class="font-weight-bold" for="genre">Choose genre:</label>
+              {{ filter.form.genre }}
+            </li>
+            <li class="list-group-item">
+              <label class="font-weight-bold" for="id_characters">Choose characters:</label>
+              {{ filter.form.characters }}
+            </li>
+          </ul>
+          <label class="font-weight-bold" for="status_block">Choose publication status:</label>
+          <div id="status_block">
+            {% for status in filter.form.is_published %}
+              <div class="form-check">
+                {{ status }}
+              </div>
+            {% endfor %}
+          </div>
+        </p>
+        <p>
+          <h5 class="card-title font-weight-bold">Order by</h5>
+          <select class="form-select" name="order_by" id="order_by">
+            {% for ordering_field in filter.form.order_by %}
+              {{ ordering_field }}
+            {% endfor %}
+          </select>
+        </p>
+        <button class="btn btn-outline-success" type="submit">Submit</button>
+      </form>
+    </div>
+  </div>
+{% endblock filtering %}
+
+{% block page_title %}
+  <h1 class="h1 text-center">My Fanfictions</h1>
+{% endblock page_title %}
+
+{% block fanfiction_list %}
+  <ul class="list-group">
+    {% for fanfiction in fanfiction_list %}
+      <li class="list-group-item border border-success">
+        <div class="d-flex justify-content-between">
+          <h2>{{ fanfiction.title }}</h2>
+          {% if fanfiction.is_published %}
+            <div class="text-success">Published:
+              <a class="text-decoration-underline">{{ fanfiction.publication_date }}</a>
+            </div>
+          {% else %}
+            <div class="text-danger">Unpublished</div>
+          {% endif %}
+        </div>
+        <div class="mb-3">Genre:
+          <a class="text-decoration-underline">{{ fanfiction.genre }}</a>
+        </div>
+        <p class="text-break justify-content-between">{{ fanfiction.text|slice:":255" }}...</p>
+        <a class="btn btn-outline-primary" href="{% url 'fanfiction-details' pk=fanfiction.id %}">Read</a>
+        {% if not fanfiction.is_published %}
+          <a href="{% url 'delayed-publication' fanfiction.id %}" class="btn btn-outline-primary">Delay publication</a>
+        {% endif %}
+        <a href="{% url 'update-fanfiction' fanfiction.id %}" class="btn btn-outline-success">Edit</a>
+      </li>
+    {% empty %}
+      <li class="list-group-item border border-danger">There are no fanfictions.</li>
+    {% endfor %}
+  </ul>
+{% endblock fanfiction_list %}

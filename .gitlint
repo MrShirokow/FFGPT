@@ -1,0 +1,21 @@
+# Gitlint config: https://jorisroovers.com/gitlint/configuration/
+
+[general]
+ignore=body-is-missing
+ignore-merge-commits=true
+
+[title-max-length]
+line-length=50
+
+[title-min-length]
+min-length=3
+
+# Make sure that commit title starts with uppercase letter
+[title-match-regex]
+regex=\A[A-Z]
+
+[body-max-line-length]
+line-length=79
+
+[body-min-length]
+min-length=1

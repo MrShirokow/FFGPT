@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+  <div class="content">
+    <div class="card border border-success">
+      <div class="card-header border-bottom border-success">
+        <div class="d-flex justify-content-between">
+          {% if fanfiction.user == user %}
+            <div class="p-2 text-primary">Created:
+              <a class="text-decoration-underline">{{ fanfiction.created }}</a>
+            </div>
+            <div class="p-2 text-info">Modified:
+              <a class="text-decoration-underline">{{ fanfiction.modified }}</a>
+            </div>
+          {% endif %}
+          {% if fanfiction.is_published %}
+            <div class="p-2 text-success">Published:
+              <a class="text-decoration-underline">{{ fanfiction.publication_date }}</a>
+            </div>
+          {% else %}
+            <div class="p-2 text-danger">Unpublished</div>
+          {% endif %}
+        </div>
+        <div class="d-flex justify-content-between">
+          <div class="p-2">Genre: {{ fanfiction.genre }}</div>
+          <div class="p-2">Author: {{ fanfiction.user }}</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="text-center">
+          <h4 class="card-title font-weight-bold">{{ fanfiction.title }}</h4>
+        </div>
+        <p class="card-text justify-content-between">{{ fanfiction.text|linebreaks }}</p>
+        <div class="card text-center mb-3">
+          <div class="card-header font-weight-bold border border-success">Characters of the fanfiction:</div>
+          <div class="card-body">
+            <div class="list-group">
+              {% for character in fanfiction.characters.all %}
+                <a href="{% url 'character-details' pk=character.id %}" class="list-group-item list-group-item-action text-black border border-primary">{{ character }}</a>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer text-center">
+        {% if fanfiction.user == user %}
+          <a href="{% url 'update-fanfiction' fanfiction.id %}" class="btn btn-outline-success">Edit</a>
+        {% endif %}
+        <a href="{{ request.META.HTTP_REFERER }}" class="btn btn-outline-primary">Go back</a>
+      </div>
+    </div>
+  </div>
+{% endblock content %}

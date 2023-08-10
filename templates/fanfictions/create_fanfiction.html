@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block head %}
+  <link rel="stylesheet" href="{% static 'css/fanfictions/fanfiction_forms.css' %}" />
+{% endblock head %}
+
+{% block content %}
+
+  <div class="content-container">
+    <div class="card border border-success">
+      <div class="card-header fs-1 text-center">Create Fanfiction</div>
+      <div class="card-body">
+        <form method="post" autocomplete="off">
+          {% csrf_token %}
+          {{ form.media }}
+          <div class="mb-3">
+            <label for="title" class="form-label required-field">Title</label>
+            <input type="text" name="title" class="form-control" id="title" value="{{ form.title.value|default_if_none:'' }}" placeholder="Enter the title">
+            {{ form.errors.title }}
+          </div>
+          <label class="form-label required-field" for="id_genre">Genre</label>
+          <div class="mb-3">
+            {{ form.genre }}
+            {{ form.errors.genre }}
+          </div>
+          <label for="id_characters" class="form-label required-field">Characters</label>
+          <div class="mb-3">
+            {{ form.characters }}
+            {{ form.errors.characters }}
+          </div>
+          <div class="mb-3">
+            <label for="text" class="form-label required-field">Text</label>
+            <textarea class="form-control" name="text" id="text" rows="5"placeholder="Enter the text for your fanfiction">{{ form.text.value|default_if_none:'' }}</textarea>
+            {{ form.errors.text }}
+          </div>
+          <div class="text-center">
+            <button type="submit" class="btn btn-outline-success">Create</button>
+          </div>
+        </form>
+      </div>
+      <div class="card-footer text-center">
+        <a href="{{ request.META.HTTP_REFERER }}" class="btn btn-outline-primary">Go back</a>
+      </div>
+    </div>
+  </div>
+
+{% endblock content %}

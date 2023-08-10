@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block head %}
+  <link rel="stylesheet" href="{% static 'css/characters/character_forms.css' %}" />
+{% endblock head %}
+
+{% block content %}
+
+  <div class="content-container">
+    <div class="card border border-success">
+      <div class="card-header fs-1 text-center">Create Character</div>
+      <div class="card-body">
+        <form method="post" autocomplete="off">
+          {% csrf_token %}
+          {{ form.media }}
+          <div class="mb-3">
+            <label for="name" class="form-label required-field">Name</label>
+            <input type="text" name="name" class="form-control" id="name" value="{{ form.name.value|default_if_none:'' }}" placeholder="Enter the name">
+            {{ form.errors.name }}
+          </div>
+          <div class="row mb-3">
+            <div class="col">
+              <label class="form-label" for="gender">Gender</label>
+              <select class="form-select" name="gender" id="gender">
+                {% for gender in form.gender %}
+                  {{ gender }}
+                {% endfor %}
+              </select>
+              {{ form.errors.gender }}
+            </div>
+            <div class="col">
+              <label for="age" class="form-label required-field">Age</label>
+              <input type="number" name="age" class="form-control" id="age" value="{{ form.age.value|default_if_none:'' }}" placeholder="Enter the age">
+              {{ form.errors.age }}
+            </div>
+          </div>
+          <label class="form-label required-field" for="id_universe">Universe</label>
+          <div class="mb-3">
+            {{ form.universe }}
+            {{ form.errors.universe }}
+          </div>
+          <div class="mb-3">
+            <label for="description" class="form-label required-field">Description</label>
+            <textarea class="form-control" name="description" id="description" rows="5"placeholder="Enter the description">{{ form.description.value|default_if_none:'' }}</textarea>
+            {{ form.errors.description }}
+          </div>
+          <div class="text-center">
+            <button type="submit" class="btn btn-outline-success">Create</button>
+          </div>
+        </form>
+      </div>
+      <div class="card-footer text-center">
+        <a href="{{ request.META.HTTP_REFERER }}" class="btn btn-outline-primary">Go back</a>
+      </div>
+    </div>
+  </div>
+
+{% endblock content %}

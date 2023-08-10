@@ -1,0 +1,26 @@
+:root {
+  --white: #ffffff;
+  --red: #c41414;
+}
+
+.img-account-profile {
+  height: 200px;
+  width: 220px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.card {
+  margin: 0 auto;
+  border-radius: 10px;
+  width: 700px;
+}
+
+.container{
+  margin-top: 60px;
+}
+
+.errorlist {
+  color: var(--red);
+  font-size: small;
+}
