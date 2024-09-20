@@ -1,6 +1,6 @@
 # README
 
-FFGPT is an Django app to generate FanFictions using ChatGPT.
+FFGPT is a Django app to generate FanFictions using ChatGPT.
 
 ## Links
 * [Installation (for instructions on how to run project locally)](docs/INSTALL.md)
