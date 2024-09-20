@@ -1,6 +1,6 @@
 # README
 
-FFGPT is an awesome service to generate FanFictions using ChatGPT.
+FFGPT is an Django app to generate FanFictions using ChatGPT.
 
 ## Links
 * [Installation (for instructions on how to run project locally)](docs/INSTALL.md)
@@ -13,4 +13,4 @@ Python / Django
 
 ## Using ChatGPT
 
-For the local environment, you need to put your `OPENAI_API_KEY` in the file `config/setting/local.py `
+For the local environment, you need to put your `OPENAI_API_KEY` in the file `config/setting/local.py`
